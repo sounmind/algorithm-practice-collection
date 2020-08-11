@@ -10,27 +10,31 @@ public class Bj_2839 {
 		int N = sc.nextInt();
 		int result = 0;
 		
-		if(N==7 || N==4 || N==2 || N==1) {
-			result = -1;
+		while(N>0) {
+			if(N % 5 == 0) {
+				N -= 5;
+				result++;
+				System.out.println("N="+N+", result="+result);
+			}
+			else if(N % 3 == 0) {
+				N -= 3;
+				result++;
+				System.out.println("N="+N+", result="+result);
+				
+			}
+			else if(N > 5) {
+				N -= 5;
+				result++;
+				System.out.println("N="+N+", result="+result);
+			}
+			else {
+				result = -1;
+				System.out.println("N="+N+", result="+result+" and break");
+				break;
+			}
 		}
-		else if(N%5==0) {
-			result = N/5;
-		}
-		else if(((N - 5*(N/5))) % 3==0) {
-			result = N/5 + 1;
-		}
-		else if((N - 5*((N/5)-1))%3==0) {
-			result = ((N/5)-1) +  (N - 5*((N/5)-1))/3;
-		}
-		else if((N - 5*((N/5)-2))%3==0) {
-			result = ((N/5)-2) +  (N - 5*((N/5)-2))/3;
-		}
-		else if(N%3==0) {
-			result = N/3;
-		}
-		else {
-			result = -1;
-		}
+		
+		
 		System.out.println(result);
 	}
 
