@@ -17,10 +17,6 @@ public class Bj_1463 { // DP | 1로 만들기 (Bottom-up)
             	dp[i] = Math.min(dp[i], dp[i / 3] + 1);
             }
         }
-		for(int i=1; i<=n; i++) {
-			System.out.print(dp[i]+" ");
-		}
-		System.out.println();
 		System.out.println(dp[n]);
 		sc.close();
 	}
