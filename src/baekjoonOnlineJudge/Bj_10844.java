@@ -13,13 +13,12 @@ public class Bj_10844 {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		int N = Integer.parseInt(br.readLine());
 		
-		double[] digit = new double[10];
+		long[] digit = new long[10];
 		digit[0] = 0;
 		for(int i=1; i<10; i++) {
 			digit[i] = 1;
 		}
-		
-		double[] newDigit = digit.clone();
+		long[] newDigit = digit.clone();
 		
 		for(int i=1; i<=N-1; i++) {
 			newDigit[0] = digit[1]%1000000000;
@@ -35,9 +34,9 @@ public class Bj_10844 {
 		}
 		System.out.println();
 		
-		double sum = 0;
+		long sum = 0;
 		for(int i=0; i<10; i++) {
-			sum = sum + newDigit[i]%1000000000;
+			sum = (sum + newDigit[i])%1000000000;
 		}
 		bw.write(Integer.toString((int)sum%1000000000));
 		bw.flush();
