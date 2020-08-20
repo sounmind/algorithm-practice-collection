@@ -17,7 +17,7 @@ public class Bj_1193 {
 			count = line*(line+1)/2;
 		}
 		
-		System.out.println("count="+count+" input="+input);
+		// System.out.println("count="+count+" input="+input);
 		
 		if(line%2 != 0) { // 홀수 번째 대각선
 			numerator 	= 1 	+ (count - input);
