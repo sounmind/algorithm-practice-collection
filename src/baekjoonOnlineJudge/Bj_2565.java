@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class Bj_2565 { // 전깃줄 제거하기
