@@ -1,14 +1,16 @@
 def solution(participant, completion):
     answer = ''
-
+    
+    # 참가자, 완주자 명단 정렬
     participant.sort()
     completion.sort()
+
     for part, compl in zip(participant, completion):
-        if part != compl:
-            answer += part
-            break
-    if answer == '':
-        answer += participant[-1]
+        if part != compl: # 같은 순서의 참가자와 완주자 명단의 이름이 서로 다르다면,
+            answer += part # 그 참가자가 완주하지 않은 것이므로 정답 문자열에 추가
+            break # 완주하지 않은 사람은 한 명이므로 바로 중단
+    if answer == '': # 완주자 명단의 끝까지 갔음에도 참가자 명단과 서로 다른 사람이 없었다면,
+        answer += participant[-1] # 참가자 명단의 가장 마지막 사람이 완주하지 않은 사람
         
     return answer
 
