@@ -1,9 +1,18 @@
-def solution(numbers):
-    sum_set = set([]) # 집합 초기화
-    for i in range(len(numbers)):
-        for j in range(i+1, len(numbers)):
-            sum_set.add(numbers[i]+numbers[j]) # 차례대로 집합에 추가하기
-    return sorted(list(sum_set)) # 집합을 리스트로 바꾼 뒤 정렬한 다음 반환
+from itertools import combinations  # 조합 모듈 이용하기
 
-print(solution(	[2, 1, 3, 4, 1] ))
-print(solution(	[5, 0, 2, 7] ))
+# 바로 set()을 선언하고 진행해도 되지만
+# 프로그래머스 json iteralize 오류 때문에 list 위주로 풀이했다.
+
+
+def solution(numbers):
+    answer = []
+
+    # 조합 모듈 사용
+    result = combinations(numbers, 2)
+
+    for combination in result:
+        answer.append(sum(combination))
+    # 리스트를 집합으로 바꿔 중복을 제거 -> 다시 리스트로 바꾸어 오름차 정렬
+    answer = sorted(list(set(answer)))
+
+    return answer
