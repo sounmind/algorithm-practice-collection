@@ -1,3 +1,6 @@
+# 풀지 못함
+
+
 def solution(encrypted_text, key, rotation):
     answer = ""
 
@@ -17,9 +20,9 @@ def solution(encrypted_text, key, rotation):
     return answer
 
 
-print(solution("qyyigoptvfb", "abcdefghijk", 3)) # hellopython
-print(solution("hellopython", "abcdefghijk", 3)) # igoptvfbqyy
+print(solution("qyyigoptvfb", "abcdefghijk", 3))  # hellopython
+print(solution("hellopython", "abcdefghijk", 0))  # igoptvfbqyy
 print(solution("xyz", "dbc", 0))  # bac
 print(solution("abc", "abc", 0))  # bdf
 print(solution("y", "g", 0))  # f
-print(solution("h", "a", 0))  # f
+print(solution("hell", "abcd", 1))  # f
