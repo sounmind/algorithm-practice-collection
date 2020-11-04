@@ -1,33 +1,26 @@
-from itertools import combinations
-
-
 def solution(number, k):
-    answer = ""
-    number_list = list(map(int, list(number)))
-    answer_len = len(number) - k
+    num_list = []  # 가장 큰 수가 모일 배열
 
-    # 첫 값
-    try:
-        max_num = max(number_list[: -k + 1])
-    except:
-        max_num = max(number_list)
-    answer += str(max_num)
-    max_index = -1
+    for (i, num) in enumerate(number):
+        # num_list에 원소가 존재하고
+        # num_list의 마지막 원소가 number의 해당 원소보다 작아야 하고,
+        # k가 0보다 클 때 (빼야 할 수가 남아 있을 때)
+        # num_list의 가장 마지막 값을 제거하고 k를 -1 한다.
+        while num_list and num_list[-1] < num and k > 0:
+            num_list.pop()
+            k -= 1
+        # k=0, 빼야 할 수가 없을 때 나머지 숫자를 num_list에 추가한다.
+        if k == 0:
+            num_list += number[i:]
+            break
+        # 모든 조건이 아니라면, number의 현재 원소를 num_list에 추가한다.
+        num_list.append(num)
 
-    # 두번째 이후 값
-    for i in range(answer_len - 1):
-        max_index = number_list.index(max_num, max_index + 1)
-        try:
-            max_num = max(number_list[max_index + 1 : -answer_len + 2 + i])
-        except:
-            max_num = max(number_list[max_index + 1 :])
-        print("max_index", max_index)
-        answer += str(max_num)
-
+    # 반복문 바깥에서 k가 0보다 크다면(빼야 할 숫자가 남았다면) 뒤에서 k개 원소를 남기고 자른다.
+    num_list = num_list[:-k] if k > 0 else num_list
+    answer = "".join(num_list)
     return answer
 
-
-# 테스트 1, 10, 11실패
 
 print(solution("553", 2))
 print(solution("553", 1))
@@ -36,5 +29,6 @@ print(solution("1231234", 3))
 print(solution("4177252841", 4))
 print(solution("9999999999", 5))
 print(solution("9991119991", 5))
+print(solution("1000000000", 9))
 
-print([1, 2, 3, 4][1:0])
+# 참고: https://gurumee92.tistory.com/162
