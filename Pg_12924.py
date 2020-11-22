@@ -1,15 +1,17 @@
 def solution(n):
     answer = 0
-    sum = 0
-    for i in range(1, n + 1):
+    for i in range(1, n // 2 + 1):  # i = 더하기 시작하는 값
+        sum = 0
         for j in range(i, n + 1):
             sum += j
             if sum == n:
                 answer += 1
                 break
-        sum = 0
+            elif sum > n:
+                break
 
-    return answer
+    return answer + 1  # 자기 자신만을 더하는 경우 추가
 
 
 print(solution(15))  # 4
+print(solution(10000))  # 5
