@@ -1,19 +1,18 @@
-# 튜플
-def solution(s):
-    answer = []
-    given_list_without_braket = list(map(lambda x: x.split(","), s[2:-2].split("},{")))
-    number_count_dict = dict()
-    for element in given_list_without_braket:
-        for number in element:
-            if number in number_count_dict:
-                number_count_dict[number] = number_count_dict[number] + 1
-            else:
-                number_count_dict[number] = 1
+import re
+from collections import Counter
 
-    for item in sorted(
-        list(number_count_dict.items()), key=lambda x: x[1], reverse=True
-    ):
-        answer.append(int(item[0]))
+
+def solution(s):
+    dict_number_count = Counter(re.findall("\d+", s))
+
+    sorted_item_list = list(
+        sorted(dict_number_count.items(), key=lambda x: x[1], reverse=True)
+    )
+
+    answer = []
+    for key, value in sorted_item_list:
+        answer.append(int(key))
+
     return answer
 
 
