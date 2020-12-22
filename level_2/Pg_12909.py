@@ -3,9 +3,8 @@ def solution(s):  # 올바른 괄호
     for element in s:
         stack.append(element)
         find_and_delete_pair_of_bracket(stack)
-    if len(stack) > 0:
-        return False
-    return True
+        
+    return len(stack) == 0
 
 
 def find_and_delete_pair_of_bracket(stack):
