@@ -15,7 +15,6 @@ def is_prime(number):
 
 def solution(nums):
     answer = 0
-
     for combination in combinations(nums, 3):
         if is_prime(sum(combination)):
             answer += 1
