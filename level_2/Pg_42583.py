@@ -7,7 +7,7 @@ def solution(bridge_length, weight_bridge_can_hold, truck_weights):
     truck_weights = deque(truck_weights)
     sum_weight_on_bridge = 0
 
-    while bridge:
+    while True:
         time += 1
         sum_weight_on_bridge -= bridge.popleft()
         if truck_weights:
