@@ -21,7 +21,7 @@ def is_balanced_bracket_string(string):
     return string.count("(") == string.count(")")
 
 
-def is_right_bracket_string(string):  # 올바른 괄호 문자열
+def is_right_bracket_string(string):
     count = 0
     for bracket in string:
         if bracket == "(":
