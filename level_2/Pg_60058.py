@@ -8,31 +8,17 @@ def solution(given_string):
 
 
 def divide_string_to_2_balanced(string):
-    undividable_balanced, balanced = "", ""
-    total_left_bracket, total_right_bracket = 0, 0
-    for i, bracket in enumerate(string):
-        if bracket == "(":
-            total_left_bracket += 1
-        if bracket == ")":
-            total_right_bracket += 1
-        if total_left_bracket == total_right_bracket:
-            undividable_balanced = string[: i + 1]
-            try:  # 오류가 난다면, balanced 가 공백이라는 뜻
-                balanced = string[i + 1 :]
-            except:
-                balanced = ""
+    undividable_balanced, balanced = string, ""
+    for i in range(2, len(string), 2):
+        if is_balanced_bracket_string(string[:i]):
+            undividable_balanced = string[:i]
+            balanced = string[i:]
             break
     return undividable_balanced, balanced
 
 
-def reverse_bracket(string):
-    answer = ""
-    for i in range(len(string)):
-        if string[i] == "(":
-            answer += ")"
-        else:
-            answer += "("
-    return answer
+def is_balanced_bracket_string(string):
+    return string.count("(") == string.count(")")
 
 
 def is_right_bracket_string(string):  # 올바른 괄호 문자열
@@ -45,3 +31,13 @@ def is_right_bracket_string(string):  # 올바른 괄호 문자열
         if count < 0:
             return False
     return count == 0
+
+
+def reverse_bracket(string):
+    answer = ""
+    for i in range(len(string)):
+        if string[i] == "(":
+            answer += ")"
+        else:
+            answer += "("
+    return answer
