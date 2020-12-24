@@ -2,12 +2,9 @@ def solution(given_string):
     if given_string == "":
         return ""
     undividable_balanced, balanced = divide_string_to_2_balanced(given_string)
-    if is_right_bracket(undividable_balanced):
+    if is_right_bracket_string(undividable_balanced):
         return undividable_balanced + solution(balanced)
-    else:
-        return (
-            "(" + solution(balanced) + ")" + reverse_bracket(undividable_balanced[1:-1])
-        )
+    return "(" + solution(balanced) + ")" + reverse_bracket(undividable_balanced[1:-1])
 
 
 def divide_string_to_2_balanced(string):
@@ -38,18 +35,13 @@ def reverse_bracket(string):
     return answer
 
 
-def is_right_bracket(string):  # 올바른 괄호
-    stack = []
-    for element in string:
-        stack.append(element)
-        find_and_delete_pair_of_bracket(stack)
-    return len(stack) == 0
-
-
-def find_and_delete_pair_of_bracket(stack):
-    try:
-        if stack[-2:] == ["(", ")"]:
-            stack.pop()
-            stack.pop()
-    except:
-        pass
+def is_right_bracket_string(string):  # 올바른 괄호 문자열
+    count = 0
+    for bracket in string:
+        if bracket == "(":
+            count += 1
+        else:
+            count -= 1
+        if count < 0:
+            return False
+    return count == 0
