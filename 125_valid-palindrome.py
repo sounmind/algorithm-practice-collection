@@ -1,17 +1,11 @@
-import collections
-from typing import Deque
+import re
 
 
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        string_deque: Deque = collections.deque()
-        for char in s:
-            if char.isalnum():
-                string_deque.append(char.lower())
-        while len(string_deque) > 1:
-            if string_deque.popleft() != string_deque.pop():
-                return False
-        return True
+        s = s.lower()
+        s = re.sub("[^a-z0-9]", "", s)
+        return s == s[::-1]
 
 
 print(Solution().isPalindrome("asdlksajl"))
