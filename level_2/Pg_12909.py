@@ -3,7 +3,6 @@ def solution(s):  # 올바른 괄호
     for element in s:
         stack.append(element)
         find_and_delete_pair_of_bracket(stack)
-        
     return len(stack) == 0
 
 
