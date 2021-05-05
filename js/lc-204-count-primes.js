@@ -1,10 +1,6 @@
 var countPrimes = function (n) {
   n--;
 
-  if (n === 1 || n === 0) {
-    return 0;
-  }
-
   const isPrimeNumber = Array(n + 1).fill(1);
   isPrimeNumber[0] = 0;
   isPrimeNumber[1] = 0;
