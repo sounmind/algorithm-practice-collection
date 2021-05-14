@@ -3,11 +3,22 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 var moveZeroes = function (nums) {
-  const nonZeroes = nums.filter((num) => num !== 0);
-  const zeroesLength = nums.length - nonZeroes.length;
-  const zeros = Array(zeroesLength).fill(0);
+  let indexForNonZero = 0;
 
-  nums.splice(0, nums.length, ...nonZeroes, ...zeros);
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] !== 0) {
+      nums[indexForNonZero] = nums[i];
+      indexForNonZero += 1;
+    }
+  }
+
+  const zeroesLength = nums.length - indexForNonZero;
+  let indexForZero = indexForNonZero;
+
+  for (let i = 0; i < zeroesLength; i++) {
+    nums[indexForZero] = 0;
+    indexForZero += 1;
+  }
 };
 
 // tests
