@@ -4,11 +4,15 @@
  * @return {number[]}
  */
 var twoSum = function (numbers, target) {
-  for (let i = 0; i < numbers.length - 1; i++) {
-    for (let j = i + 1; j < numbers.length; j++) {
-      if (numbers[i] + numbers[j] === target) {
-        return [i + 1, j + 1];
-      }
+  const match = {};
+
+  for (let i = 0; i < numbers.length; i++) {
+    const substraction = target - numbers[i];
+
+    if (match[numbers[i]]) {
+      return [numbers.indexOf(substraction) + 1, i + 1];
+    } else {
+      match[substraction] = true;
     }
   }
 };
