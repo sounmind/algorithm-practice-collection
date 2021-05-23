@@ -2,7 +2,30 @@
  * @param {number[]} nums
  * @return {number}
  */
-var maxSubArray = function (nums) {
+
+var getContinuosOrStartValue = (nums, index) => {
+  if (index === 0) {
+    return nums[0];
+  }
+
+  return Math.max(
+    getContinuosOrStartValue(nums, index - 1) + nums[index],
+    nums[index]
+  );
+};
+
+var getMaxByIndex = (nums, index) => {
+  if (index === 0) {
+    return nums[0];
+  }
+
+  return Math.max(
+    getMaxByIndex(nums, index - 1),
+    getContinuosOrStartValue(nums, index)
+  );
+};
+
+var maxSubArray = (nums) => {
   if (nums.length === 0) {
     return 0;
   }
@@ -11,15 +34,7 @@ var maxSubArray = function (nums) {
     return nums[0];
   }
 
-  let continuosOrStartValue = nums[0];
-  let maximum = nums[0];
-
-  for (let i = 1; i < nums.length; i++) {
-    continuosOrStartValue = Math.max(nums[i], continuosOrStartValue + nums[i]);
-    maximum = Math.max(maximum, continuosOrStartValue);
-  }
-
-  return maximum;
+  return getMaxByIndex(nums, nums.length - 1);
 };
 
 console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4])); // 6
