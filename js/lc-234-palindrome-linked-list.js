@@ -16,9 +16,7 @@ var isPalindrome = function (head) {
 
   while (current) {
     length++;
-    current.prev = previous;
-    previous = current;
-    current = current.next;
+    [current.prev, previous, current] = [previous, current, current.next];
   }
 
   let [left, right] = [head, previous];
