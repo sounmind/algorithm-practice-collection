@@ -12,14 +12,13 @@
  */
 var hasCycle = function (head) {
   let current = head;
-  const cache = [];
 
   while (current) {
-    if (cache.includes(current)) {
+    if (current.visited) {
       return true;
+    } else {
+      current.visited = true;
     }
-
-    cache.push(current);
 
     current = current.next;
   }
