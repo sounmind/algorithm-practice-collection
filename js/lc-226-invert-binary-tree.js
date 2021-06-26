@@ -15,20 +15,12 @@ var invertTree = function(root) {
     return null;
   }
 
-  function helper(node) {
-    if (node === null) {
-      return;
-    }
+  const left = root.left;
+  root.left = root.right;
+  root.right = left;
 
-    const left = node.left;
-    node.left = node.right;
-    node.right = left;
-
-    helper(node.left);
-    helper(node.right);
-  }
-
-  helper(root);
+  invertTree(root.left);
+  invertTree(root.right);
 
   return root;
 };
