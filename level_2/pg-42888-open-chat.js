@@ -4,34 +4,38 @@ function solution(records) {
 
   records.forEach((record) => {
     const [action, id, nickname] = record.split(" ");
+    const memoId = idMemo[id];
 
     if (action === "Enter") {
-      if (idMemo[id]) {
-        const prevNickname = idMemo[id];
-        idMemo[id] = nickname;
-        changeNickname(messages, id, prevNickname, nickname);
-        messages.push({ id, message: `${nickname}님이 들어왔습니다.` });
+      if (memoId) {
+        const prevNickname = memoId.nickname;
+        memoId.nickname = nickname;
+
+        changeNickname(memoId.indexes, messages, prevNickname, nickname);
+
+        memoId.indexes.push(messages.length);
       } else {
-        messages.push({ id, message: `${nickname}님이 들어왔습니다.` });
-        idMemo[id] = nickname;
+        idMemo[id] = { nickname, indexes: [messages.length] };
       }
+
+      messages.push(`${nickname}님이 들어왔습니다.`);
     } else if (action === "Leave") {
-      messages.push({ id, message: `${idMemo[id]}님이 나갔습니다.` });
+      memoId.indexes.push(messages.length);
+      messages.push(`${memoId.nickname}님이 나갔습니다.`);
     } else if (action === "Change") {
-      const prevNickname = idMemo[id];
-      idMemo[id] = nickname;
-      changeNickname(messages, id, prevNickname, nickname);
+      const prevNickname = memoId.nickname;
+      memoId.nickname = nickname;
+
+      changeNickname(memoId.indexes, messages, prevNickname, nickname);
     }
   });
 
-  return messages.map((messageObj) => messageObj.message);
+  return messages;
 }
 
-function changeNickname(array, id, prevName, newName) {
-  array.forEach((messageObj) => {
-    if (messageObj.id === id) {
-      messageObj.message = messageObj.message.replace(prevName, newName);
-    }
+function changeNickname(indexes, messages, prevName, newName) {
+  indexes.forEach((index) => {
+    messages[index] = messages[index].replace(prevName, newName);
   });
 }
 
@@ -51,3 +55,46 @@ console.log(
 //   "Prodo님이 나갔습니다.",
 //   "Prodo님이 들어왔습니다.",
 // ];
+
+// function solution(records) {
+//   const messages = [];
+//   const idMemo = {};
+
+//   records.forEach((record, index) => {
+//     const [action, id, nickname] = record.split(" ");
+//     const memoId = idMemo[id];
+
+//     if (action === "Enter") {
+//       if (memoId) {
+//         const prevNickname = memoId.nickname;
+//         memoId.nickname = nickname;
+
+//         changeNickname(memoId.indexes, messages, prevNickname, nickname);
+
+//         memoId.indexes.push(index);
+//       } else {
+//         idMemo[id] = { nickname, indexes: [index] };
+//       }
+
+//       messages.push(`${nickname}님이 들어왔습니다.`);
+//     } else if (action === "Leave") {
+//       memoId.indexes.push(index);
+//       messages.push(`${memoId.nickname}님이 나갔습니다.`);
+//     } else if (action === "Change") {
+//       const prevNickname = memoId.nickname;
+//       memoId.nickname = nickname;
+
+//       changeNickname(memoId.indexes, messages, prevNickname, nickname);
+
+//       memoId.indexes.push(index);
+//     }
+//   });
+
+//   return messages;
+// }
+
+// function changeNickname(indexes, messages, prevName, newName) {
+//   indexes.forEach((index) => {
+//     messages[index] = messages[index].replace(prevName, newName);
+//   });
+// }
