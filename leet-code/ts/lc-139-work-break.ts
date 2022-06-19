@@ -1,15 +1,14 @@
 const wordBreak = function (origin: string, wordDict: string[]) {
-  const originMemo = [true, ...new Array(origin.length).fill(false)];
+  const words = new Set(wordDict);
+  const wordLengths = new Set(wordDict.map((word) => word.length));
+  const startIndexes = new Set([0]);
 
-  for (let startIndex = 0; startIndex <= origin.length; startIndex++) {
-    if (originMemo[startIndex] === true) {
-      for (const word of wordDict) {
-        if (origin.slice(startIndex, startIndex + word.length) === word) {
-          originMemo[startIndex + word.length] = true;
-        }
+  for (const startIndex of startIndexes) {
+    for (const wordLength of wordLengths) {
+      if (words.has(origin.slice(startIndex, startIndex + wordLength))) {
+        startIndexes.add(startIndex + wordLength);
       }
     }
   }
-
-  return originMemo[origin.length];
+  return startIndexes.has(origin.length);
 };
